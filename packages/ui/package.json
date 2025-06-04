@@ -8,10 +8,14 @@
     "react-dom": "^18.0.0"
   },
   "devDependencies": {
-    "@types/react": "^19.1.5"
+    "@types/react": "^19.1.5",
+    "@types/react-dom": "^19.1.5"
   },
   "scripts": {
     "build": "tsc"
   },
-  "dependencies": {}
+  "dependencies": {
+    "lucide-react": "^0.511.0",
+    "react-router-dom": "^7.6.1"
+  }
 }

@@ -1,0 +1,71 @@
+.bottom-drawer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 50;
+  transition: opacity 0.1s ease-in-out, visibility 0.1s ease-in-out;
+
+  &.open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &.closed {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .drawer-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--section-bg-color);
+    height: 100px;
+    border-radius: 28px 28px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px 16px;
+  }
+  .drawer-content {
+    overflow: scroll;
+  }
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.drawer {
+  background-color: var(--tg-theme-section-bg-color);
+  width: 100%;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.2s ease-in-out;
+  touch-action: none;
+  .drawer-header {
+    background-color: var(--tg-theme-section-bg-color);
+  }
+}
+
+.drag-handle {
+  position: absolute;
+  top: 4px;
+  left: 0;
+  right: 0;
+  width: 32px;
+  height: 4px;
+  background-color: var(--tg-theme-secondary-bg-color);
+  border-radius: 10px;
+  margin: 0 auto;
+  cursor: pointer;
+}
