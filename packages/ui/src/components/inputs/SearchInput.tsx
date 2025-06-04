@@ -1,11 +1,5 @@
 import { X, Search as SearchIcon } from "lucide-react";
-import {
-  useRef,
-  useState,
-  ReactNode,
-  useEffect,
-  InputHTMLAttributes,
-} from "react";
+import { useRef, useState, ReactNode, InputHTMLAttributes } from "react";
 import "./style.scss";
 
 interface SearchInputProps
@@ -22,7 +16,7 @@ interface SearchInputProps
   onClick?: (e: React.MouseEvent<HTMLDivElement | HTMLInputElement>) => void;
 }
 
-export default function SearchInput({
+export function SearchInput({
   placeholder = "Search",
   value,
   showClear = true,
@@ -95,7 +89,7 @@ export default function SearchInput({
             className="ml-2 cursor-pointer"
             onClick={(e) => {
               e.stopPropagation();
-              
+
               if (onClear) onClear();
               else onChange("");
             }}

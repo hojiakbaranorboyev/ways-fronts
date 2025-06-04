@@ -1,7 +1,7 @@
 import { FC, PropsWithChildren } from "react";
 
 interface ISection extends React.ButtonHTMLAttributes<HTMLDivElement> {}
-const Section: FC<PropsWithChildren<ISection>> = ({
+export const Section: FC<PropsWithChildren<ISection>> = ({
   children,
   className = "",
   ...props
@@ -16,4 +16,3 @@ const Section: FC<PropsWithChildren<ISection>> = ({
   );
 };
 
-export default Section;

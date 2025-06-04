@@ -11,7 +11,7 @@ type Props = {
   onChange: (value: string) => void;
 };
 
-export default function SegmentedSwitch({ options, active, onChange }: Props) {
+export function SegmentedSwitch({ options, active, onChange }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const [activeStyle, setActiveStyle] = useState({ left: 0, width: 0 });

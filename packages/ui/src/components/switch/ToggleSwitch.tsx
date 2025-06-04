@@ -8,7 +8,7 @@ type Props = {
   discount?: number;
 };
 
-function ToggleSwitch({ seat, label, price, discount }: Props) {
+export function ToggleSwitch({ seat, label, price, discount }: Props) {
   // const isOn = useSeatStore((state) => state.seats[seat]?.isOn);
   // const toggleSeat = useSeatStore((state) => state.toggleSeat);
   return <></>;

@@ -1,13 +1,44 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Ways</title>
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <div id="modal-root"></div>
+    <div id="drawer"></div>
+    <script>
+      function loadTelegramScript() {
+        const script = document.createElement("script");
+        script.id = "telegram-script";
+        script.src = "https://telegram.org/js/telegram-web-app.js?56";
+        script.defer = true;
+        script.onload = () => {
+          console.log("Loaded");
+          
+          window?.Telegram?.WebApp?.LocationManager?.init();
+          // window.Telegram?.WebApp?.requestFullscreen();
+          window.Telegram?.WebApp?.disableVerticalSwipes();
+          // setTimeout(() => {
+          //   window.Telegram?.WebApp?.LocationManager?.getLocation(console.log);
+          //   if (window.Telegram?.WebApp.isFullscreen) {
+          //     document.body.classList.add("telegram__fullscreen");
+          //   }
+          // }, 100);
+        };
+        document.body.appendChild(script);
+      }
+      console.log("ishladim");
+      
+      loadTelegramScript();
+    </script>
+    <script type="module" src="/src/main.tsx" async></script>
   </body>
 </html>

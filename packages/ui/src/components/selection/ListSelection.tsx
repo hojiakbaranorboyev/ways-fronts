@@ -11,7 +11,7 @@ interface IListSelection {
   onChange: (item: IOption) => void;
 }
 
-function ListSelection({ options, selectedKeys, onChange }: IListSelection) {
+export function ListSelection({ options, selectedKeys, onChange }: IListSelection) {
   return (
     <ul className="space-y-2">
       {options?.map((item) => (
@@ -34,5 +34,3 @@ function ListSelection({ options, selectedKeys, onChange }: IListSelection) {
     </ul>
   );
 }
-
-export default ListSelection;

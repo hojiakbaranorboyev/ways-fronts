@@ -1,19 +1,16 @@
-import { Wallet, Clock, UsersRound } from "lucide-react";
 import { NavLink } from "react-router-dom";
 
-const navItems = [
-  { label: "Do'stlar", icon: <UsersRound size={20} />, path: "/friends" },
-  { label: "Buyurtmalar", icon: <Wallet size={20} />, path: "/orders" },
-  { label: "History", icon: <Clock size={20} />, path: "/history" },
-];
 
-function Footer() {
+interface IProps {
+  items: { label: string; icon: React.ReactNode; path: string }[];
+}
+export function Footer({ items }: IProps) {
   return (
     <div
       className="fixed bottom-0 left-0 right-0 bg-[var(--tg-theme-section-bg-color)] flex justify-around items-center py-2 z-50"
       style={{ boxShadow: "0 -1px 0 var(--tg-theme-section-separator-color)" }}
     >
-      {navItems.map((item) => {
+      {items.map((item) => {
         return (
           <NavLink
             key={item.path}
@@ -35,5 +32,3 @@ function Footer() {
     </div>
   );
 }
-
-export default Footer;

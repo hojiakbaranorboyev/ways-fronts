@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import { createPortal } from "react-dom";
-import { CrossIcon, X } from "lucide-react";
+import { X } from "lucide-react";
 import "./style.scss";
 
 interface BottomDrawerProps {
@@ -19,7 +19,7 @@ interface BottomDrawerProps {
   title?: string;
 }
 const windowHeight = window.innerHeight - 120;
-const BottomDrawer: React.FC<BottomDrawerProps> = ({
+export const BottomDrawer: React.FC<BottomDrawerProps> = ({
   isOpen,
   defaultHeight = 300,
   minHeight = 0,
@@ -179,5 +179,3 @@ const BottomDrawer: React.FC<BottomDrawerProps> = ({
     document.getElementById("drawer") as HTMLElement
   );
 };
-
-export default BottomDrawer;
