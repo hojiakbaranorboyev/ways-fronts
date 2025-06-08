@@ -9,10 +9,8 @@ const request = axios.create({
 const abortTokens: IObj = {};
 request.interceptors.request.use(
   (config) => {
-    const initData = (window as any)?.Telegram.WebApp.initData;
-
-    if (initData) {
-    }
+    const initData = (window as any)?.Telegram.WebApp.initData || localStorage.getItem("auth") || "";
+    if (!initData) return config;
     config.headers.Authorization = initData
       ? btoa(parseQueryString(initData))
       : "";
@@ -27,10 +25,10 @@ function getData<R>(payload: IGetRequest): globalGetReturnType<R> {
   if (url in abortTokens) abortTokens[url]?.cancel();
 
   abortTokens[url] = axios.CancelToken.source();
-  const urls = query ? `?${stringify(query)}` : "";
+  const params = query ? `?${stringify(query)}` : "";
   return new Promise((resolve, reject) => {
     request
-      .get<IResponseStandard<R>>(url + urls, {
+      .get<IResponseStandard<R>>("/api" + url + params, {
         cancelToken: abortTokens[url].token,
       })
       .then((res) => {

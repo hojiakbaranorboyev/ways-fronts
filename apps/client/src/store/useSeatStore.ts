@@ -1,8 +1,8 @@
 // src/store/useSeatStore.ts
 import { create } from "zustand";
 
-type SeatKey = "front" | "backLeft" | "backMiddle" | "backRight";
-type Seat = { type: SeatKey; price: number; isOn: boolean, discount:number };
+export type SeatKey = "front" | "backLeft" | "backMiddle" | "backRight";
+export type Seat = { type: SeatKey; price: number; isOn: boolean, discount:number };
 type SeatStore = {
   seats: Record<SeatKey, null | Seat>;
   toggleSeat: (seat: Seat) => void;

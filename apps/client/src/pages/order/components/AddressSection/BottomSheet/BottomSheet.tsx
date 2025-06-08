@@ -1,8 +1,7 @@
 import { regionUrl } from "constants/urls";
 import { useMemo, useState } from "react";
 import { useAddressStore } from "store/useAddress";
-import { BottomDrawer, ListSelection, SearchInput, useDataFetch } from "ui";
-import computeCalc from "utils/computeCalc";
+import { BottomDrawer, computeCalc, ListSelection, SearchInput, useDataFetch } from "ui";
 
 const maxHeight = computeCalc("calc(100vh - 50px)");
 function Body({

@@ -1,52 +1,104 @@
-import { ButtonHTMLAttributes, MouseEvent, useRef } from "react";
-import "./ripple.css"; // We'll create this for animation
-
-interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children: React.ReactNode;
-  onClick?: () => void;
-  className?: string;
+import React, { useState } from "react";
+import "./style.scss";
+// Define the shape of the ripple state
+interface RippleState {
+  x: number;
+  y: number;
+  size: number;
 }
 
-export function RippleButton({
+// Define the props for the RippleButton component
+interface RippleButtonProps {
+  children: React.ReactNode; // Content inside the button
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void; // Optional click handler
+  size?: "sm" | "md" | "lg"; // Optional size prop with specific literal values
+}
+
+// RippleButton component: A reusable button with a ripple effect and sizing options
+export const RippleButton: React.FC<RippleButtonProps> = ({
   children,
   onClick,
-  className = "",
-  ...props
-}: Props) {
-  const btnRef = useRef<HTMLButtonElement>(null);
+  size = "md",
+}) => {
+  // State to manage the ripple's position and size
+  const [ripple, setRipple] = useState<RippleState | null>(null);
 
-  const createRipple = (event: MouseEvent<HTMLButtonElement>) => {
-    const button = btnRef.current;
-    const circle = document.createElement("span");
-    const diameter = Math.max(button!.clientWidth, button!.clientHeight);
-    const radius = diameter / 2;
+  // Handle click event for the button
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const button = event.currentTarget;
+    const rect = button.getBoundingClientRect();
 
-    circle.style.width = circle.style.height = `${diameter}px`;
-    circle.style.left = `${event.clientX - button!.offsetLeft - radius}px`;
-    circle.style.top = `${event.clientY - button!.offsetTop - radius}px`;
-    circle.classList.add("ripple");
+    // Calculate the size of the ripple (ensure it covers the button)
+    const sizeVal = Math.max(rect.width, rect.height);
 
-    const ripple = button!.getElementsByClassName("ripple")[0];
+    // Calculate the x and y coordinates relative to the button
+    const x = event.clientX - rect.left - sizeVal / 2;
+    const y = event.clientY - rect.top - sizeVal / 2;
 
-    if (ripple) {
-      ripple.remove();
+    // Set the ripple state, which triggers its rendering and animation
+    setRipple({ x, y, size: sizeVal });
+
+    // Call the onClick prop if provided
+    if (onClick) {
+      onClick(event);
     }
+  };
 
-    button!.appendChild(circle);
+  // Function to clear the ripple after its animation ends
+  const handleAnimationEnd = () => {
+    setRipple(null); // Remove the ripple from the DOM
+  };
+
+  // Determine button padding based on the 'size' prop
+  const sizeClasses: { [key: string]: string } = {
+    sm: "py-2 px-6 text-sm", // Small button
+    md: "py-2.5 px-6.5 text-base", // Medium button (default)
+    lg: "py-6 px-12 text-lg", // Large button
   };
 
   return (
     <button
-      ref={btnRef}
-      onClick={(e) => {
-        createRipple(e);
-        onClick?.();
-      }}
-      className={`relative overflow-hidden cursor-pointer my-2 w-full rounded py-3 font-medium transition-all duration-200 
-        bg-[var(--tg-theme-button-color)] text-[var(--tg-theme-button-text-color)] ${className}`}
-      {...props}
+      onClick={handleClick}
+      className={`
+        animate-ripple
+        relative                         // Needed for absolute positioning of ripple
+        overflow-hidden                  // Hides the ripple outside the button
+        bg-[var(--tg-theme-button-color)]
+        font-semibold                    // Font weight
+        rounded-xl                       // Large rounded corners
+        transition-all                   // Smooth transitions for other properties
+        duration-150                     // Transition duration
+        ease-in-out                      // Easing function
+        active:scale-98                  // Slightly scale down when active (clicked)
+        active:brightness-90             // Slight brightness reduction when active
+        min-w-[150px]                    // Minimum width for consistency
+        flex items-center justify-center // To center children vertically and horizontally
+        w-full
+        ${
+          sizeClasses[size] || sizeClasses.md
+        } // Apply dynamic sizing classes or default to md
+      `}
     >
-      {children}
+      {children} {/* Render children (e.g., "CONTINUE" text) */}
+      {/* Ripple Effect Element */}
+      {/* {ripple && (
+        <span
+          className={`
+            absolute
+            rounded-full
+            opacity-75                     // Initial ripple opacity
+            transform                      // Enable CSS transforms
+            animate-ripple                 // Apply the ripple animation
+          `}
+          style={{
+            left: ripple.x,
+            top: ripple.y,
+            width: ripple.size,
+            height: ripple.size,
+          }}
+          onAnimationEnd={handleAnimationEnd} // Clear ripple after animation
+        ></span>
+      )} */}
     </button>
   );
-}
+};

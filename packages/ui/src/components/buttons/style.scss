@@ -1,0 +1,18 @@
+@keyframes ripple-animation {
+  from {
+    transform: scale(0);
+    opacity: 0.75;
+  }
+  to {
+    transform: scale(
+      2
+    ); /* Scale to twice the calculated size to ensure it covers the button */
+    opacity: 0;
+  }
+}
+
+.animate-ripple {
+  box-shadow: none !important;
+  --tw-ring-shadow: none !important;
+//   animation: ripple-animation 0.6s linear forwards;
+}

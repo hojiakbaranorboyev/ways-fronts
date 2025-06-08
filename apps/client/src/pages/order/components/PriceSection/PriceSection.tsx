@@ -1,7 +1,6 @@
 import { useMemo } from "react";
 import { useSeatStore } from "store/useSeatStore";
-import { Section } from "ui";
-import { currencyFormat } from "utils/currencyFormat";
+import { currencyFormat, Section } from "ui";
 
 function PriceSection() {
   const selectedSeats = useSeatStore((state) => state.seats);

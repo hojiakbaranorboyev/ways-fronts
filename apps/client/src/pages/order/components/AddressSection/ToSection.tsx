@@ -1,7 +1,6 @@
-import SearchInput from "components/inputs/SearchInput";
-import Section from "components/section/Section";
 import { MapPin } from "lucide-react";
 import BottomSheet from "./BottomSheet/BottomSheet";
+import { SearchInput, Section } from "ui";
 
 function ToSection({
   openDrawer,
