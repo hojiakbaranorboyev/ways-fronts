@@ -1,0 +1,8 @@
+.seat-section{
+    .switch{
+        &:last-child{
+            border: none;
+            margin-bottom: 0;
+        }
+    }
+}
